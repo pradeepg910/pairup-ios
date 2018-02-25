@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>800982673705-asevs11nbpj4iapnqklq0n2hgmpadu71.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.800982673705-asevs11nbpj4iapnqklq0n2hgmpadu71</string>
+	<key>API_KEY</key>
+	<string>AIzaSyACc_C1ksB7I1EGBP_xzRGqx0x3s2jXgLA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>800982673705</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.paisa.pairup</string>
+	<key>PROJECT_ID</key>
+	<string>pair-up-4fa05</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pair-up-4fa05.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:800982673705:ios:8fe76103e0d689c0</string>
+	<key>DATABASE_URL</key>
+	<string>https://pair-up-4fa05.firebaseio.com</string>
+</dict>
+</plist>
