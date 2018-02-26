@@ -5,6 +5,9 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var mobbersPickerView: UIPickerView!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     
     var timerSeconds = 0;
     var timer = Timer();
@@ -12,16 +15,52 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var minutes: [String] = [];
     var selectedMinutes = 0;
     var mobbers: [String] = [];
+    var activeMobberIndex = 0;
+    
+    
+    @IBAction func nextAction(_ sender: Any) {
+        activeMobberIndex += 1
+        mobbersPickerView.selectRow(activeMobberIndex, inComponent: 0, animated: true)
+        setupForwardAndBackwardButton()
+
+    }
+    
+    @IBAction func previousButton(_ sender: Any) {
+        activeMobberIndex -= 1;
+        mobbersPickerView.selectRow(activeMobberIndex, inComponent: 0, animated: true)
+        setupForwardAndBackwardButton()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mobbersPickerView.dataSource = self;
         mobbersPickerView.delegate = self;
+        mobbersPickerView.selectRow(activeMobberIndex, inComponent: 0, animated: true)
         
         timerButtonGesture()
         runTimer()
+        setupForwardAndBackwardButton()
+    }
+    
+    
+    func setupForwardAndBackwardButton() {
+        if(mobbers.count == 1) {
+            nextButton.isEnabled = false;
+            nextButton.backgroundColor = UIColor.gray
+            previousButton.isEnabled = false;
+            previousButton.backgroundColor = UIColor.gray
+        } else if((activeMobberIndex + 1) == mobbers.count) {
+            nextButton.isEnabled = false;
+            nextButton.backgroundColor = UIColor.gray
+            previousButton.isEnabled = true;
+            previousButton.backgroundColor = UIColor.orange
+        } else if(activeMobberIndex == 0) {
+            nextButton.isEnabled = true;
+            nextButton.backgroundColor = UIColor.orange
+            previousButton.isEnabled = false;
+            previousButton.backgroundColor = UIColor.gray
+        }
     }
     
     func timerButtonGesture() {
@@ -34,7 +73,15 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     
         func normalTap(){
-            timerSeconds = 0;
+            if (pauseButton.titleLabel?.text == "Pause") {
+                timer.invalidate()
+                pauseButton.setTitle( "Resume" , for: .normal )
+                pauseButton.backgroundColor = UIColor.green
+            } else if (pauseButton.titleLabel?.text == "Resume") {
+                pauseButton.setTitle( "Pause" , for: .normal )
+                pauseButton.backgroundColor = UIColor.blue
+                runTimer()
+            }
         }
     
         func longTap(sender : UIGestureRecognizer){

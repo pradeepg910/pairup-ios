@@ -1,29 +1,30 @@
 
 import UIKit
 
-class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,
-    UITextFieldDelegate, UICollectionViewDataSource,
-    UICollectionViewDelegate{
+class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource,
+    UITextFieldDelegate {
 
     @IBOutlet weak var minutesView: UIPickerView!
+    @IBOutlet weak var mobbersTableView: UITableView!
     @IBOutlet weak var mobberTextField: UITextField!
     @IBOutlet weak var timerButton: UIButton!
-    @IBOutlet weak var mobberCollectionView: UICollectionView!
     
     var timerSeconds = 0;
     var timer = Timer();
     var minutes: [String] = [];
-    var mobbers: [String] = ["Padeep Ganesan", "Sarah Pradeep"];
-    
+    var mobbers: [String] = [];
+    var activeMobberIndex = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mobbersTableView.dataSource = self
+        mobbersTableView.delegate = self
+        mobbersTableView.layoutMargins = UIEdgeInsets.zero
+        mobbersTableView.separatorInset = UIEdgeInsets.zero
+        
+        
         mobberTextField.delegate = self
         mobberTextField.keyboardAppearance = UIKeyboardAppearance.dark;
-        
-        mobberCollectionView.dataSource = self
-        mobberCollectionView.delegate = self
-        
         
         setupDataForMinutesPicker()
         
@@ -34,11 +35,16 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let destinationVC = segue.destination as! TimerViewController
         destinationVC.selectedMinutes = Int(minutes[minutesView.selectedRow(inComponent: 0)])!;
         destinationVC.mobbers = mobbers;
+        destinationVC.activeMobberIndex = activeMobberIndex
     }
     
     @IBAction func enterPressed(_ sender: Any) {
         addMobber(mobberTextField.text!)
         hideKeyboard()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        activeMobberIndex = indexPath.row;
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,10 +72,14 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
         if(mobber != "" && !mobbers.contains(mobber)) {
             mobbers.append(mobber)
             mobberTextField.text = ""
-            mobberCollectionView.reloadData()
+            mobbersTableView.reloadData()
             setupTimerButton()
         }
-        print(mobbers);
+        if(mobbers.count > 1) {
+            let index = IndexPath(item: 0, section: 0)
+            mobbersTableView.selectRow(at: index, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+
+        }
     }
     
     func numberOfComponents(in minutesView: UIPickerView) -> Int {
@@ -84,56 +94,23 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
         return minutes[row]
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mobbers.count;
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (mobbers.count)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: MobberCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mobCell", for: indexPath) as! MobberCell;
-        cell.mobCell.text = shortName(name: mobbers[indexPath.row])
-        
-        return cell;
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "itemCell")
+        cell.backgroundColor = UIColor.gray
+        cell.textLabel?.text = mobbers[indexPath.row]
+        return(cell)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        highlightCell(indexPath: indexPath, flag: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        highlightCell(indexPath: indexPath, flag: false)
-    }
-    
-    func highlightCell(indexPath : IndexPath, flag: Bool) {
-        
-        let cell: MobberCell = mobberCollectionView.cellForItem(at: indexPath) as! MobberCell
-        
-        if flag {
-            cell.mobCell.backgroundColor = UIColor.orange
-            cell.mobCell.text = mobbers[indexPath.row]
-            cell.mobCell.font = UIFont.systemFont(ofSize: CGFloat(15))
-        } else {
-            cell.mobCell.text = shortName(name: mobbers[indexPath.row])
-            cell.mobCell.backgroundColor = UIColor.gray
-            cell.mobCell.adjustsFontSizeToFitWidth = true
-            
-
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.delete) {
+            mobbers.remove(at: indexPath.row)
+            mobbersTableView.reloadData()
+            setupTimerButton()
         }
-    }
-    
-    func shortName(name: String) -> String {
-        let names = name.components(separatedBy: " ");
-        
-        if(names.count >= 2) {
-            let firstChar = names[0].substring(to: names[0].index(names[0].startIndex, offsetBy: 1)).uppercased()
-            
-            let secondChar = names[1].substring(to: names[1].index(names[1].startIndex, offsetBy: 1)).lowercased()
-            return firstChar + secondChar
-        } else if(names.count == 1) {
-            return "Pr";
-        } else {
-            return "Un";
-        }
-        
     }
     
     func setupTimerButton() {
