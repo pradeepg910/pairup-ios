@@ -12,7 +12,7 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
     var timerSeconds = 0;
     var timer = Timer();
     var minutes: [String] = [];
-    var mobbers: [String] = [];
+    var mobbers: [String] = ["Pradeep", "Sarah"];
     var activeMobberIndex = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,7 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
         setupTimerButton()
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! TimerViewController
@@ -100,11 +101,14 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "itemCell")
-        cell.backgroundColor = UIColor.gray
+        cell.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
         cell.textLabel?.text = mobbers[indexPath.row]
-        return(cell)
+        return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 35
+    }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
             mobbers.remove(at: indexPath.row)
@@ -112,6 +116,16 @@ class TimerHomeController: UIViewController, UIPickerViewDataSource, UIPickerVie
             setupTimerButton()
         }
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = (view as? UILabel) ?? UILabel()
+        
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 25)
+        label.text = minutes[row];
+        return label
+    }
+    
     
     func setupTimerButton() {
         if(mobbers.count == 0) {

@@ -12,11 +12,12 @@
 		D3C0A4CE2042F5C100F67B38 /* TimerHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0A4CD2042F5C100F67B38 /* TimerHomeController.swift */; };
 		D3C0A4D02042F7CE00F67B38 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0A4CF2042F7CE00F67B38 /* TimerViewController.swift */; };
 		D3C0A4D220436BAA00F67B38 /* MobberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0A4D120436BAA00F67B38 /* MobberCell.swift */; };
+		D3C0A4D72044D28F00F67B38 /* RotateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0A4D62044D28F00F67B38 /* RotateViewController.swift */; };
+		D3C0A4DD20460BEA00F67B38 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C0A4DC20460BEA00F67B38 /* add.png */; };
 		D3DC88602041BC7800A54256 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3DC885F2041BC7800A54256 /* GoogleService-Info.plist */; };
 		F4443AE01DF2DFDA00800C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4443ADF1DF2DFDA00800C92 /* AppDelegate.swift */; };
 		F4443AE51DF2DFDA00800C92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4443AE31DF2DFDA00800C92 /* Main.storyboard */; };
 		F4443AE71DF2DFDA00800C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4443AE61DF2DFDA00800C92 /* Assets.xcassets */; };
-		F4443AEA1DF2DFDA00800C92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4443AE81DF2DFDA00800C92 /* LaunchScreen.storyboard */; };
 		F4443AF51DF2E34F00800C92 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4443AF11DF2E34F00800C92 /* SignUpViewController.swift */; };
 		F4443AF61DF2E34F00800C92 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4443AF21DF2E34F00800C92 /* HomeViewController.swift */; };
 		F4443AF71DF2E34F00800C92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4443AF31DF2E34F00800C92 /* LoginViewController.swift */; };
@@ -29,6 +30,8 @@
 		D3C0A4CD2042F5C100F67B38 /* TimerHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerHomeController.swift; sourceTree = "<group>"; };
 		D3C0A4CF2042F7CE00F67B38 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		D3C0A4D120436BAA00F67B38 /* MobberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobberCell.swift; sourceTree = "<group>"; };
+		D3C0A4D62044D28F00F67B38 /* RotateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateViewController.swift; sourceTree = "<group>"; };
+		D3C0A4DC20460BEA00F67B38 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = ../../../Downloads/add.png; sourceTree = "<group>"; };
 		D3DC885F2041BC7800A54256 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E295EBBD70657D3018731C02 /* Pods_PairUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PairUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E90C5A1089D0D57D97A13F8B /* Pods-PairUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PairUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PairUp/Pods-PairUp.release.xcconfig"; sourceTree = "<group>"; };
@@ -36,7 +39,6 @@
 		F4443ADF1DF2DFDA00800C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4443AE41DF2DFDA00800C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4443AE61DF2DFDA00800C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F4443AE91DF2DFDA00800C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4443AEB1DF2DFDA00800C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4443AF11DF2E34F00800C92 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		F4443AF21DF2E34F00800C92 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D3C0A4D52044D26700F67B38 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D3C0A4CD2042F5C100F67B38 /* TimerHomeController.swift */,
+				D3C0A4CF2042F7CE00F67B38 /* TimerViewController.swift */,
+				D3C0A4D62044D28F00F67B38 /* RotateViewController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		D3C0A4DA2045CB7600F67B38 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D3C0A4DC20460BEA00F67B38 /* add.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		D3C0A4DB2045CC0500F67B38 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		F4443AD31DF2DFDA00800C92 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +121,9 @@
 		F4443ADE1DF2DFDA00800C92 /* Pairup */ = {
 			isa = PBXGroup;
 			children = (
+				D3C0A4DB2045CC0500F67B38 /* utils */,
+				D3C0A4DA2045CB7600F67B38 /* images */,
+				D3C0A4D52044D26700F67B38 /* controllers */,
 				D3C0A4CB2041CA4800F67B38 /* Pairup.xcworkspace */,
 				D3DC885F2041BC7800A54256 /* GoogleService-Info.plist */,
 				F4443AF11DF2E34F00800C92 /* SignUpViewController.swift */,
@@ -104,10 +134,7 @@
 				F4443AE31DF2DFDA00800C92 /* Main.storyboard */,
 				D3C0A4D120436BAA00F67B38 /* MobberCell.swift */,
 				F4443AE61DF2DFDA00800C92 /* Assets.xcassets */,
-				F4443AE81DF2DFDA00800C92 /* LaunchScreen.storyboard */,
 				F4443AEB1DF2DFDA00800C92 /* Info.plist */,
-				D3C0A4CD2042F5C100F67B38 /* TimerHomeController.swift */,
-				D3C0A4CF2042F7CE00F67B38 /* TimerViewController.swift */,
 			);
 			name = Pairup;
 			path = FirebaseTutorial;
@@ -176,10 +203,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4443AEA1DF2DFDA00800C92 /* LaunchScreen.storyboard in Resources */,
 				D3DC88602041BC7800A54256 /* GoogleService-Info.plist in Resources */,
 				F4443AE71DF2DFDA00800C92 /* Assets.xcassets in Resources */,
 				F4443AE51DF2DFDA00800C92 /* Main.storyboard in Resources */,
+				D3C0A4DD20460BEA00F67B38 /* add.png in Resources */,
 				D3C0A4CC2041CA4800F67B38 /* Pairup.xcworkspace in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4443AF71DF2E34F00800C92 /* LoginViewController.swift in Sources */,
+				D3C0A4D72044D28F00F67B38 /* RotateViewController.swift in Sources */,
 				F4443AF51DF2E34F00800C92 /* SignUpViewController.swift in Sources */,
 				D3C0A4D220436BAA00F67B38 /* MobberCell.swift in Sources */,
 				F4443AF81DF2E34F00800C92 /* ResetPasswordViewController.swift in Sources */,
@@ -275,14 +303,6 @@
 				F4443AE41DF2DFDA00800C92 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F4443AE81DF2DFDA00800C92 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4443AE91DF2DFDA00800C92 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

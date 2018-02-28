@@ -22,7 +22,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         activeMobberIndex += 1
         mobbersPickerView.selectRow(activeMobberIndex, inComponent: 0, animated: true)
         setupForwardAndBackwardButton()
-
+        
     }
     
     @IBAction func previousButton(_ sender: Any) {
@@ -37,7 +37,6 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         mobbersPickerView.dataSource = self;
         mobbersPickerView.delegate = self;
         mobbersPickerView.selectRow(activeMobberIndex, inComponent: 0, animated: true)
-        
         timerButtonGesture()
         runTimer()
         setupForwardAndBackwardButton()
@@ -61,6 +60,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             previousButton.isEnabled = false;
             previousButton.backgroundColor = UIColor.gray
         }
+        restart()
     }
     
     func timerButtonGesture() {
@@ -71,50 +71,70 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         timerButton.addGestureRecognizer(longGesture)
     }
     
+    func pause() {
+        timer.invalidate()
+        pauseButton.setTitle( "Resume" , for: .normal )
+        pauseButton.backgroundColor = #colorLiteral(red: 0.1883924036, green: 0.5184605013, blue: 0.004479386496, alpha: 1)
+    }
     
-        func normalTap(){
-            if (pauseButton.titleLabel?.text == "Pause") {
-                timer.invalidate()
-                pauseButton.setTitle( "Resume" , for: .normal )
-                pauseButton.backgroundColor = UIColor.green
-            } else if (pauseButton.titleLabel?.text == "Resume") {
-                pauseButton.setTitle( "Pause" , for: .normal )
-                pauseButton.backgroundColor = UIColor.blue
-                runTimer()
-            }
+    func resume() {
+        pauseButton.setTitle( "Pause" , for: .normal )
+        pauseButton.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+        runTimer()
+    }
+    
+    func restart() {
+        timerSeconds = 0
+    }
+    
+    func normalTap(){
+        if (pauseButton.titleLabel?.text == "Pause") {
+            pause()
+        } else if (pauseButton.titleLabel?.text == "Resume") {
+            resume()
+        } else if (pauseButton.titleLabel?.text == "Stop") {
+            stopTimer()
+            performSegue(withIdentifier: "timerDone", sender: nil)
         }
+    }
     
-        func longTap(sender : UIGestureRecognizer){
-            if sender.state == .ended {
-                stopTimer()
-                performSegue(withIdentifier: "timerDone", sender: nil)
-
-                //go to home
-            }
-            else if sender.state == .began {
-                if(timerButton.titleLabel?.text == "Pause") {
-                    timerButton.setTitle( "Stop" , for: .normal )
-                    timerButton.backgroundColor = UIColor.red
-                }
-            }
+    
+    func longTap(sender : UIGestureRecognizer){
+        if sender.state == .ended {
         }
-    
-        func runTimer() {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        else if sender.state == .began {
+            timerButton.setTitle( "Stop" , for: .normal )
+            timerButton.backgroundColor = UIColor.red
         }
+    }
     
-        func updateTimer() {
-            if(timerSeconds < totalTimerSeconds()) {
-                timerSeconds += 1
-                timerLabel.text = formatToHHMMSS(time: TimeInterval(timerSeconds))
-            } else {
-                // rotate
-                timerSeconds = 0
-                timer.invalidate();
-//                playSound()
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.25, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
     
-            }
+    func updateTimer() {
+        if(timerSeconds < totalTimerSeconds()) {
+            timerSeconds += 1
+            timerLabel.text = formatToHHMMSS(time: TimeInterval(timerSeconds))
+        } else {
+            // rotate
+            timerSeconds = 0
+            timer.invalidate();
+            performSegue(withIdentifier: "rotateTimeSegue", sender: nil)
+            
+            //                playSound()
+            
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "rotateTimeSegue") {
+            let destinationVC = segue.destination as! RotateViewController
+            destinationVC.mobbers = mobbers;
+            destinationVC.activeMobberIndex = activeMobberIndex
+            destinationVC.selectedMinutes = selectedMinutes;
+        }
+    }
     
     func numberOfComponents(in minutesView: UIPickerView) -> Int {
         return 1;
@@ -128,6 +148,15 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return mobbers[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = (view as? UILabel) ?? UILabel()
+        
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 25)
+        label.text = mobbers[row];
+        return label
+    }
+    
     
     //
     //    func playSound() {
@@ -136,21 +165,21 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     //        AudioServicesPlaySystemSound (systemSoundID)
     //        AudioServicesPlaySystemSound (systemSoundID)
     //    }
-        func totalTimerSeconds() -> Int {
-            let totalSeconds: Int = selectedMinutes * 60;
-            return totalSeconds;
-        }
+    func totalTimerSeconds() -> Int {
+        let totalSeconds: Int = selectedMinutes * 60;
+        return totalSeconds;
+    }
     
-        func stopTimer() {
-            timerSeconds = 0
-            timer.invalidate()
-            
-        }
+    func stopTimer() {
+        timerSeconds = 0
+        timer.invalidate()
         
-        func formatToHHMMSS(time:TimeInterval) -> String {
-            let minutes = Int(time) / 60 % 60
-            let seconds = Int(time) % 60
-            return String(format:"%02d:%02d", minutes, seconds)
-        }
+    }
+    
+    func formatToHHMMSS(time:TimeInterval) -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02d:%02d", minutes, seconds)
+    }
     
 }
